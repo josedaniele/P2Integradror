@@ -1,7 +1,7 @@
 import sqlite3
 
 tabla = "CREATE TABLE IF NOT EXISTS MONOPATIN (ID INTEGER PRIMARY KEY, MARCA VARCHAR (20) UNIQUE, PRECIO FLOAT NOT NULL, CANTIDAD_DISPONIBLE INTEGER NOT NULL)"
-agregar_mono = "INSERT INTO MONOPATIN(marca,precio,cantidad-disponible) VALUES(?,?,?)"
+agregar_mono = "INSERT INTO MONOPATIN(marca,precio,cant_disponible) VALUES('{}', '{}','{}','{}')"
 tabla_completa= "SELECT * FROM MONOPATIN"
 borrar = "DELETE FROM MONOPATIN WHERE id= ?"
 updt_precio = "UPDATE MONOPATIN SET precio =? WHERE id = ?"
@@ -12,12 +12,12 @@ def conectar():
 
 def crear_tabla(conexion):
     with conexion:
-        conexion.execute(tabla)
+        conexion.miCursor.execute(tabla)
    
 
 def insert_monopatin(conexion,marca,precio,cant_disponible):
     with conexion:
-        conexion.execute(agregar_mono,(marca, precio, cant_disponible))
+        conexion.miCursor.execute(agregar_mono,(marca, precio, cant_disponible))
 
 def mostrar_tabla(conexion):
     with conexion:
