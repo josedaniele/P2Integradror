@@ -1,32 +1,19 @@
 import sqlite3
 
-tabla = "CREATE TABLE IF NOT EXISTS MONOPATIN (ID INTEGER PRIMARY KEY, MARCA VARCHAR (20) UNIQUE, PRECIO FLOAT NOT NULL, CANTIDAD_DISPONIBLE INTEGER NOT NULL)"
-agregar_mono = "INSERT INTO MONOPATIN(marca,precio,cant_disponible) VALUES('{}', '{}','{}','{}')"
-tabla_completa= "SELECT * FROM MONOPATIN"
-borrar = "DELETE FROM MONOPATIN WHERE id= ?"
-updt_precio = "UPDATE MONOPATIN SET precio =? WHERE id = ?"
+class Conexiones:
+    
+    def iniciar(self):
+        self.miConexion = sqlite3.connect("MONOPATIN")
+        self.miCursor = self.miConexion.cursor()
+        
+    def finalizar(self):
+        self.miConexion.close()   
 
-def conectar():
-    return sqlite3.connect("Datos_Monopatin.db")
-   
-
-def crear_tabla(conexion):
-    with conexion:
-        conexion.miCursor.execute(tabla)
-   
-
-def insert_monopatin(conexion,marca,precio,cant_disponible):
-    with conexion:
-        conexion.miCursor.execute(agregar_mono,(marca, precio, cant_disponible))
-
-def mostrar_tabla(conexion):
-    with conexion:
-        return conexion.execute(tabla_completa).fetchall()
-
-def eliminar_monopatin(conexion, id):
-    with conexion:
-        conexion.execute(borrar, (id))
-
-def modificar_precio(conexion, precio, id):
-    with conexion:
-        conexion.execute(updt_precio,(precio,id))
+class Tabla:
+    def crearTabla():
+        conexion = Conexiones()
+        conexion.iniciar()
+        conexion.miCursor.execute("DROP TABLE IF EXISTS MONOPATINES")
+        conexion.miCursor.execute("CREATE TABLE MONOPATINES (ID INTEGER PRIMARY KEY , marca  VARCHAR(30) ,precio FLOAT NOT NULL, cant_disponibles INTEGER NOT NULL,UNIQUE(marca))")    
+        conexion.miConexion.commit()       
+        conexion.finalizar()
