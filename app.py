@@ -1,5 +1,5 @@
 from database import crearTabla
-from funciones import Monopatin, modificar_Monopatin, borrar_monopatin, mostrarTabla
+from funciones import Monopatin, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador
 
 def menuPrincipal():
     print("\nBienvenido al sistema de cargas de Monopatines")
@@ -55,7 +55,7 @@ def cargar_datos(opcion):
         Valido = True
         while Valido == True:
             try:
-                marca1 = input("Ingrese la marca ").upper()
+                marca1 = input("Ingrese la marca: ").upper()
                 Valido = False
             except ValueError:
                 separador()
@@ -65,7 +65,7 @@ def cargar_datos(opcion):
         Valido = True
         while Valido == True:
             try:
-                precio1 = float(input("Ingrese el precio "))
+                precio1 = float(input("Ingrese el precio: "))
                 Valido = False
             except ValueError:
                 separador()
@@ -82,8 +82,6 @@ def cargar_datos(opcion):
                 print("Valor invalido,introduzca un numero")
                 separador()
 
-def separador():
-    print("---------------------------------")
 
 crearTabla()
 menuPrincipal()
