@@ -14,7 +14,6 @@ def menuPrincipal():
         )
         opcion =int(input("Ingrese un numero en base a las opciones: \n"))
         try :
-            
             if opcion == 1:
                 marca= input("Ingrese la marca del monopatin: ")
                 precio = float(input("Ingrese el precio del monopatin: "))
@@ -33,8 +32,8 @@ def menuPrincipal():
 
             elif opcion == 4:
                 marca = input("Ingrese la marca del monopatin: ")
-                cant_disponibles = int(input("Ingrese la nueva cantidad de monoppatines disponibles: "))#se puede automatizar
-                actualizacion_cantidad = Monopatin(marca, cant_disponibles)
+                cant_disponibles = int(input("Ingrese la nueva cantidad de monopatines disponibles: "))
+                actualizacion_cantidad = Monopatin(marca, cant_disponibles = cant_disponibles)
                 actualizacion_cantidad.cargarDisponibilidad()
 
             elif opcion == 5:

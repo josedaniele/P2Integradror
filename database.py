@@ -13,7 +13,6 @@ class Conexiones:
 def crearTabla():
     conexion = Conexiones()
     conexion.iniciar()
-    conexion.miCursor.execute("DROP TABLE IF EXISTS MONOPATINES")
-    conexion.miCursor.execute("CREATE TABLE MONOPATINES (ID INTEGER PRIMARY KEY , marca  VARCHAR(30) ,precio FLOAT NOT NULL, cant_disponibles INTEGER NOT NULL,UNIQUE(marca))")    
+    conexion.miCursor.execute("CREATE TABLE IF NOT EXISTS MONOPATINES (ID INTEGER PRIMARY KEY , marca  VARCHAR(30) ,precio FLOAT NOT NULL, cant_disponibles INTEGER NOT NULL,UNIQUE(marca))")    
     conexion.miConexion.commit()       
     conexion.finalizar()
