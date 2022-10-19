@@ -92,3 +92,6 @@ def modificar_Monopatin(precio, id1):
 def separador():
     print("---------------------------------")
 
+
+
+

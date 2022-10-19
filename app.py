@@ -1,5 +1,5 @@
 from database import Tablas
-from funciones import Monopatin, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador
+from funciones import Monopatin, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador,combinarTablas
 
 def menuPrincipal():
     print("\nBienvenido al sistema de cargas de Monopatines")
@@ -84,6 +84,7 @@ def cargar_datos(opcion):
 
 tabla1 = Tablas
 tabla1.crearTabla()
+tabla1.crearTabla2()
 menuPrincipal()
 
 
