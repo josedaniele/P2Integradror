@@ -12,28 +12,25 @@ def menuPrincipal():
             "5.Mostrar Tabla\n"
             "0.Salir del Menu\n"
         )
-        opcion =int(input("Ingrese un numero en base a las opciones: \n"))
         try :
+            opcion =int(input("Ingrese un numero en base a las opciones: \n"))
             if opcion == 1:
-                marca= input("Ingrese la marca del monopatin: ")
-                precio = float(input("Ingrese el precio del monopatin: "))
-                cant_disponibles = int(input("Ingrese la cantidad de unidades disponibles: "))
-                monopatin1 = Monopatin(marca, precio, cant_disponibles)
+                cargar_datos(opcion)
+                monopatin1 = Monopatin(marca1, precio1, cant_ingresada)
                 monopatin1.cargar_monopatin()
 
             elif opcion == 2:
                 id1 = int(input("Ingrese el ID del monopatin que desea modificar: "))
-                precio = float(input("Ingrese el nuevo precio para el monopatin: "))
-                modificar_Monopatin(precio, id1)
+                cargar_datos(opcion)
+                modificar_Monopatin(precio1, id1)
 
             elif opcion == 3 :
                id1 = int(input("Ingrese el ID del monopatin que desea eliminar: "))
                borrar_monopatin(id1)
 
             elif opcion == 4:
-                marca = input("Ingrese la marca del monopatin: ")
-                cant_disponibles = int(input("Ingrese la nueva cantidad de monopatines disponibles: "))
-                actualizacion_cantidad = Monopatin(marca, cant_disponibles = cant_disponibles)
+                cargar_datos(opcion)
+                actualizacion_cantidad = Monopatin(marca1, cant_disponibles = cant_ingresada)
                 actualizacion_cantidad.cargarDisponibilidad()
 
             elif opcion == 5:
@@ -46,8 +43,47 @@ def menuPrincipal():
             else:
                 print("Ingrese un numero dentro de las opciones")
         except ValueError:
+            separador()
             print("Valor invalido, ingrese un numero")
+            separador()
 
+def cargar_datos(opcion):
+    global marca1
+    global precio1
+    global cant_ingresada
+    if opcion == 1 or opcion == 4:
+        Valido = True
+        while Valido == True:
+            try:
+                marca1 = input("Ingrese la marca ").upper()
+                Valido = False
+            except ValueError:
+                separador()
+                print("Valor inavlido, introduzca un numero")
+                separador()
+    if opcion == 1 or opcion == 2:
+        Valido = True
+        while Valido == True:
+            try:
+                precio1 = float(input("Ingrese el precio "))
+                Valido = False
+            except ValueError:
+                separador()
+                print("Valor inavlido, introduzca un numero")
+                separador()
+    if opcion == 1 or opcion == 4 :
+        Valido = True
+        while Valido == True:
+            try:
+                cant_ingresada = int(input("Ingrese la cantidad disponible de monopatines "))
+                Valido = False
+            except ValueError:
+                separador()
+                print("Valor invalido,introduzca un numero")
+                separador()
+
+def separador():
+    print("---------------------------------")
 
 crearTabla()
 menuPrincipal()
