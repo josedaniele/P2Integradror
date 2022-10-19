@@ -19,30 +19,7 @@ class Monopatin:
         finally:
             conexion.finalizar()
 
-    def borrar_monopatin(self):
-        conexion = Conexiones()
-        conexion.iniciar()
-        try:
-            conexion.miCursor.execute("DELETE FROM MONOPATINES where marca='{}'")
-            conexion.miConexion.commit()
-            print("El monopatin fue eliminado exitosamente")
-        except:
-            print("el monopatin no pudo ser eliminado")
-        finally:
-            conexion.finalizar()
-
-    def modificar_Monopatin(self):
-        conexion = Conexiones()
-        conexion.iniciar()
-        try:
-            conexion.miCursor.execute("UPDATE MONOPATINES SET precio='{}' where marca='{}' ".format(self.precio, self.marca))
-            conexion.miConexion.commit()
-            print("Se modifico el monopatin")
-        except:
-            print('Error al modificar el monopatin')
-        finally:
-            conexion.finalizar()  
-
+    
     def mostrarTabla(self):# revisar
         conexion = Conexiones()
         conexion.iniciar()
@@ -58,7 +35,7 @@ class Monopatin:
         conexion = Conexiones()
         conexion.iniciar()
         try:
-            conexion.miCursor.execute("UPDATE MONOPATINES SET cant_disponibles='{}' where marca='{}' ".format(self.cant_disponibles, self.marca))
+            conexion.miCursor.execute("UPDATE MONOPATINES SET cant_disponibles='{}' where marca='{}' ".format(self.marca, self.cant_disponibles))
             conexion.miConexion.commit()
             print("Se modifico la cantidad disponible")
         except:
@@ -66,6 +43,38 @@ class Monopatin:
         finally:
             conexion.finalizar()
 
+def mostrarTabla():# revisar
+    conexion = Conexiones()
+    conexion.iniciar()
+    try:
+        conexion.miCursor.execute("SELECT * FROM MONOPATINES")
+        print(conexion.miCursor.fetchall())
+    except:
+        print("No se puede mostrar la tabla")
+    finally:
+        conexion.finalizar()
 
+def borrar_monopatin(id1):
+    conexion = Conexiones()
+    conexion.iniciar()
+    try:
+        conexion.miCursor.execute("DELETE FROM MONOPATINES WHERE ID='{}'".format(id1))
+        conexion.miConexion.commit()
+        print("El monopatin fue eliminado exitosamente")
+    except:
+        print("el monopatin no pudo ser eliminado")
+    finally:
+        conexion.finalizar()
 
+def modificar_Monopatin(precio, id1):
+    conexion = Conexiones()
+    conexion.iniciar()
+    try:
+        conexion.miCursor.execute("UPDATE MONOPATINES SET precio='{}' where ID='{}' ".format(precio, id1))
+        conexion.miConexion.commit()
+        print("Se modifico el monopatin")
+    except:
+        print('Error al modificar el monopatin')
+    finally:
+        conexion.finalizar()  
 

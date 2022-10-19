@@ -1,5 +1,5 @@
-from database import Tabla
-from funciones import Monopatin
+from database import crearTabla
+from funciones import Monopatin, modificar_Monopatin, borrar_monopatin, mostrarTabla
 
 def menuPrincipal():
     print("\nBienvenido al sistema de cargas de Monopatines")
@@ -16,22 +16,20 @@ def menuPrincipal():
         try :
             
             if opcion == 1:
-                marca = input("Ingrese la marca del monopatin: ")
+                marca= input("Ingrese la marca del monopatin: ")
                 precio = float(input("Ingrese el precio del monopatin: "))
                 cant_disponibles = int(input("Ingrese la cantidad de unidades disponibles: "))
                 monopatin1 = Monopatin(marca, precio, cant_disponibles)
                 monopatin1.cargar_monopatin()
 
             elif opcion == 2:
-                marca = input("Ingrese la marca del monopatin que desea modificar: ")#corregir deberia ser el id
+                id1 = int(input("Ingrese el ID del monopatin que desea modificar: "))
                 precio = float(input("Ingrese el nuevo precio para el monopatin: "))
-                monopatin_modificado = Monopatin(marca, precio)
-                monopatin_modificado.modificar_Monopatin()
+                modificar_Monopatin(precio, id1)
 
             elif opcion == 3 :
-               marca = input("Ingrese la marca del monopatin que desea eliminar: ")#corregir deberia ser el id
-               eliminar_monopatin = Monopatin(marca)
-               eliminar_monopatin.borrar_monopatin()
+               id1 = int(input("Ingrese el ID del monopatin que desea eliminar: "))
+               borrar_monopatin(id1)
 
             elif opcion == 4:
                 marca = input("Ingrese la marca del monopatin: ")
@@ -40,8 +38,7 @@ def menuPrincipal():
                 actualizacion_cantidad.cargarDisponibilidad()
 
             elif opcion == 5:
-                mostrar = Monopatin(cant_disponibles)
-                mostrar.mostrarTabla()
+                mostrarTabla()
 
             elif opcion ==0:
                 print("Gracias por usar nuestro programa")
@@ -52,8 +49,8 @@ def menuPrincipal():
         except ValueError:
             print("Valor invalido, ingrese un numero")
 
-tabla1 = Tabla()
-tabla1.crearTabla
+
+crearTabla()
 menuPrincipal()
 
 
