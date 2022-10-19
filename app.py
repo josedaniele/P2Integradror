@@ -1,4 +1,4 @@
-from database import crearTabla
+from database import Tablas
 from funciones import Monopatin, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador
 
 def menuPrincipal():
@@ -82,8 +82,8 @@ def cargar_datos(opcion):
                 print("Valor invalido,introduzca un numero")
                 separador()
 
-
-crearTabla()
+tabla1 = Tablas
+tabla1.crearTabla()
 menuPrincipal()
 
 
