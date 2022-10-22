@@ -1,3 +1,4 @@
+from tkinter import E
 from database import crearTabla, crearTabla2
 from funciones import Monopatin, Monopatin2, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador
 
@@ -10,11 +11,11 @@ def menuPrincipal():
             "3.Borrar Monopatin\n"
             "4.Cargar Disponibilidad\n"
             "5.Mostrar Tabla\n"
-            "6.Cargar Monopatin avanzado"
+            "6.Cargar Monopatin avanzado\n"
             "0.Salir del Menu\n"
         )
         try :
-            opcion =int(input("Ingrese un numero en base a las opciones: \n"))
+            opcion =int(input("Ingrese un numero en base a las opciones: "))
             if opcion == 1:
                 cargar_datos(opcion)
                 monopatin1 = Monopatin(marca1, precio1, cant_ingresada)
@@ -48,7 +49,7 @@ def menuPrincipal():
                 break
 
             else:
-                print("Ingrese un numero dentro de las opciones")
+                print("Ingrese un numero dentro de las opciones: ")
         except ValueError:
             separador()
             print("Valor invalido, ingrese un numero")
@@ -68,10 +69,15 @@ def cargar_datos(opcion):
         while Valido == True:
             try:
                 modelo1 = input("Ingrese el modelo: ").upper()
-                Valido = False
+                caracteres = len(modelo1)
+                if caracteres < 30:
+                      Valido = False
+                else:
+                      print("Ingresó una longitud mayor a 30 caracteres.")
+                      Valido = True
             except ValueError:
                 separador()
-                print("Valor inavlido, introduzca bien el modelo")
+                print("Valor invalido, introduzca bien el modelo")
                 separador()
     #marca
     if opcion == 1 or opcion == 4 or opcion == 6:
@@ -79,32 +85,45 @@ def cargar_datos(opcion):
         while Valido == True:
             try:
                 marca1 = input("Ingrese la marca: ").upper()
-                Valido = False
+                caracteres = len(marca1)
+                if caracteres < 30:
+                      Valido = False
+                else:
+                     print("Ingresó una longitud mayor a 30 caracteres.")
+                     Valido = True
             except ValueError:
                 separador()
-                print("Valor inavlido, introduzca bien la marca")
+                print("Valor invalido, introduzca bien la marca")
                 separador()
     #potencia
     if opcion == 6:
         Valido = True
         while Valido == True:
             try:
-                potencia1 = input("Ingrese la potencia del monopatin:")
-                Valido= False
+                potencia1 = input("Ingrese la potencia del monopatin: ")
+                if int(potencia1) > 0:
+                     Valido= False
+                else:
+                    Valido = True
             except ValueError:
                 separador()
-                print("Valor Invalido")
+                print("Valor invalido")
                 separador()
     #color
     if opcion == 6:
         Valido= True
         while Valido == True:
             try:
-                color1 = input("Ingrese el color del monopatin")
-                Valido = False
+                color1 = input("Ingrese el color del monopatin: ")
+                caracteres = len(color1)
+                if caracteres < 30:
+                      Valido = False
+                else:
+                     print("Ingresó una longitud mayor a 30 caracteres.")
+                     Valido = True
             except ValueError:
                 separador()
-                print("Valor Invalido")
+                print("Valor invalido")
                 separador()
     #precio
     if opcion == 1 or opcion == 2 or opcion == 6:
@@ -112,21 +131,28 @@ def cargar_datos(opcion):
         while Valido == True:
             try:
                 precio1 = float(input("Ingrese el precio: "))
-                Valido = False
+                if float(precio1) > 0:
+                     Valido= False
+                else:
+                    Valido = True
             except ValueError:
                 separador()
-                print("Valor inavlido, introduzca un numero")
+                print("Valor invalido, introduzca un numero")
                 separador()
     #cantidad de monopatines
     if opcion == 1 or opcion == 4 :
         Valido = True
         while Valido == True:
             try:
-                cant_ingresada = int(input("Ingrese la cantidad disponible de monopatines "))
+                cant_ingresada = int(input("Ingrese la cantidad disponible de monopatines: "))
+                if int(cant_ingresada) > 0:
+                     Valido= False
+                else:
+                    Valido = True
                 Valido = False
             except ValueError:
                 separador()
-                print("Valor invalido,introduzca un numero")
+                print("Valor invalido, introduzca un numero")
                 separador()
 
     #fecha
