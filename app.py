@@ -1,5 +1,5 @@
-from database import Tablas
-from funciones import Monopatin, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador,combinarTablas
+from database import crearTabla, crearTabla2
+from funciones import Monopatin, Monopatin2, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador
 
 def menuPrincipal():
     print("\nBienvenido al sistema de cargas de Monopatines")
@@ -10,6 +10,7 @@ def menuPrincipal():
             "3.Borrar Monopatin\n"
             "4.Cargar Disponibilidad\n"
             "5.Mostrar Tabla\n"
+            "6.Cargar Monopatin avanzado"
             "0.Salir del Menu\n"
         )
         try :
@@ -35,6 +36,12 @@ def menuPrincipal():
 
             elif opcion == 5:
                 mostrarTabla()
+            
+            elif opcion == 6 :
+                cargar_datos(opcion)
+                monopatin2 = Monopatin2(modelo1,marca1,potencia1,color1,precio1,fecha1)
+                monopatin2.cargar_monopatin2()
+
 
             elif opcion ==0:
                 print("Gracias por usar nuestro programa")
@@ -49,9 +56,25 @@ def menuPrincipal():
 
 def cargar_datos(opcion):
     global marca1
+    global modelo1
+    global potencia1
     global precio1
     global cant_ingresada
-    if opcion == 1 or opcion == 4:
+    global color1
+    global fecha1
+    #modelo
+    if opcion == 6 :
+        Valido = True
+        while Valido == True:
+            try:
+                modelo1 = input("Ingrese el modelo: ").upper()
+                Valido = False
+            except ValueError:
+                separador()
+                print("Valor inavlido, introduzca bien el modelo")
+                separador()
+    #marca
+    if opcion == 1 or opcion == 4 or opcion == 6:
         Valido = True
         while Valido == True:
             try:
@@ -59,9 +82,32 @@ def cargar_datos(opcion):
                 Valido = False
             except ValueError:
                 separador()
-                print("Valor inavlido, introduzca un numero")
+                print("Valor inavlido, introduzca bien la marca")
                 separador()
-    if opcion == 1 or opcion == 2:
+    #potencia
+    if opcion == 6:
+        Valido = True
+        while Valido == True:
+            try:
+                potencia1 = input("Ingrese la potencia del monopatin:")
+                Valido= False
+            except ValueError:
+                separador()
+                print("Valor Invalido")
+                separador()
+    #color
+    if opcion == 6:
+        Valido= True
+        while Valido == True:
+            try:
+                color1 = input("Ingrese el color del monopatin")
+                Valido = False
+            except ValueError:
+                separador()
+                print("Valor Invalido")
+                separador()
+    #precio
+    if opcion == 1 or opcion == 2 or opcion == 6:
         Valido = True
         while Valido == True:
             try:
@@ -71,6 +117,7 @@ def cargar_datos(opcion):
                 separador()
                 print("Valor inavlido, introduzca un numero")
                 separador()
+    #cantidad de monopatines
     if opcion == 1 or opcion == 4 :
         Valido = True
         while Valido == True:
@@ -82,9 +129,13 @@ def cargar_datos(opcion):
                 print("Valor invalido,introduzca un numero")
                 separador()
 
-tabla1 = Tablas
-tabla1.crearTabla()
-tabla1.crearTabla2()
+    #fecha
+    if opcion == 6:
+        fecha1= input("Ingrese la fecha: ")
+
+
+crearTabla()
+crearTabla2()
 menuPrincipal()
 
 

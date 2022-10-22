@@ -41,7 +41,30 @@ class Monopatin:
             separador()
         finally:
             conexion.finalizar()
-
+class Monopatin2(Monopatin):
+    def __init__(self, modelo, marca, potencia, color, precio, fecha_ultimo_precio):
+        super().__init__(marca, precio)
+        self.modelo = modelo
+        self.potencia = potencia
+        self.color = color
+        self.fecha_ultimo_precio=fecha_ultimo_precio
+    def cargar_monopatin2(self):
+        conexion = Conexiones()
+        conexion.iniciar()
+        try:
+            conexion.miCursor.execute("INSERT INTO MONOPATINES2(modelo,marca,potencia,precio,color,fechaUltimoPrecio) VALUES('{}','{}','{}','{}', '{}','{}')".format(self.modelo,self.marca,self.potencia, self.precio,self.color,self.fecha_ultimo_precio))
+            conexion.miConexion.commit()
+            separador()
+            print("Se cargo el monopatin exitosamente")
+            separador()
+        except IntegrityError:
+            separador()
+            print("La marca que ingreso ya se encuentra en la base de datos")
+            separador()
+        finally:
+            conexion.finalizar()
+        
+    
 #Funciones
 def mostrarTabla():
     conexion = Conexiones()
