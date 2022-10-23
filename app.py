@@ -1,6 +1,7 @@
 from tkinter import E
 from database import crearTabla, crearTabla2
 from funciones import Monopatin, Monopatin2, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador
+import datetime
 
 def menuPrincipal():
     print("\nBienvenido al sistema de cargas de Monopatines")
@@ -86,11 +87,16 @@ def cargar_datos(opcion):
             try:
                 marca1 = input("Ingrese la marca: ").upper()
                 caracteres = len(marca1)
-                if caracteres < 30:
+                tipo = marca1.isalpha()
+                if tipo == True:
+                 if caracteres < 30:
                       Valido = False
-                else:
+                 else:
                      print("Ingresó una longitud mayor a 30 caracteres.")
                      Valido = True
+                else: 
+                    print("Ingreso un tipo de caracter no valido.")
+                    Valido = True
             except ValueError:
                 separador()
                 print("Valor invalido, introduzca bien la marca")
@@ -116,11 +122,16 @@ def cargar_datos(opcion):
             try:
                 color1 = input("Ingrese el color del monopatin: ")
                 caracteres = len(color1)
-                if caracteres < 30:
+                tipo = color1.isalpha()
+                if tipo == True:
+                 if caracteres < 30:
                       Valido = False
-                else:
+                 else:
                      print("Ingresó una longitud mayor a 30 caracteres.")
                      Valido = True
+                else: 
+                    print("Ingreso un tipo de caracter no valido.")
+                    Valido = True
             except ValueError:
                 separador()
                 print("Valor invalido")
@@ -157,7 +168,20 @@ def cargar_datos(opcion):
 
     #fecha
     if opcion == 6:
-        fecha1= input("Ingrese la fecha: ")
+        Valido = True
+        while Valido == True:
+            try:
+                fecha1 = input("Ingrese la fecha del ultimo precio: ")
+                fecha2 = datetime.datetime.strptime(fecha1, '%d/%m/%Y')
+                if fecha1 == fecha2:
+                     Valido= False
+                else:
+                    Valido = True
+                Valido = False
+            except ValueError:
+                separador()
+                print("Valor invalido, ingrese la fecha de forma correcta.")
+                separador()
 
 
 crearTabla()
