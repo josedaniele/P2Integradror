@@ -1,3 +1,4 @@
+from os import sep
 from sqlite3 import IntegrityError
 from database import Conexiones
 from funciones import separador
@@ -14,8 +15,7 @@ class Monopatin:
         conexion = Conexiones()
         conexion.iniciar()
         try:
-            conexion.miCursor.execute("INSERT INTO MONOPATINES(marca,precio,cant_disponibles) VALUES('{}', '{}','{}')".format(
-                self.marca, self.precio, self.cant_disponibles))
+            conexion.miCursor.execute("INSERT INTO MONOPATINES(marca,precio,cant_disponibles) VALUES('{}', '{}','{}')".format(self.marca, self.precio, self.cant_disponibles))
             conexion.miConexion.commit()
             separador()
             print("Se cargo el monopatin exitosamente")
@@ -24,6 +24,8 @@ class Monopatin:
             separador()
             print("La marca que ingreso ya se encuentra en la base de datos")
             separador()
+        except:
+            print("No se logro cargar el monopatin")
         finally:
             conexion.finalizar()
 
@@ -31,12 +33,18 @@ class Monopatin:
         conexion = Conexiones()
         conexion.iniciar()
         try:
-            conexion.miCursor.execute("UPDATE MONOPATINES SET cant_disponibles='{}' where marca='{}' ".format(
-                self.cant_disponibles, self.marca))
+            conexion.miCursor.execute("UPDATE MONOPATINES SET cant_disponibles='{}' where marca='{}' ".format(self.cant_disponibles, self.marca))
             conexion.miConexion.commit()
-            separador()
-            print("Se modifico la cantidad disponible")
-            separador()
+            #DETECTA LA CANTIDAD DE CAMBIOS Y EN CASO DE NO ENCONTRAR CAMBIOS SE INTUYE QUE NO EXISTE EL MONOPATIN
+            total_changes= conexion.miConexion.total_changes
+            if total_changes == 0:
+                separador()
+                print("No se encontro el monopatin")
+                separador()
+            else:
+                separador()
+                print("La cantidad disponible fue modificada exitosamente")
+                separador()
         except:
             separador()
             print("No se logro modificar la cantidad disponible")
@@ -57,15 +65,15 @@ class Monopatin2(Monopatin):
         conexion = Conexiones()
         conexion.iniciar()
         try:
-            conexion.miCursor.execute("INSERT INTO MONOPATINES2(modelo,marca,potencia,precio,color,fechaUltimoPrecio) VALUES('{}','{}','{}','{}', '{}','{}')".format(
-                self.modelo, self.marca, self.potencia, self.precio, self.color, self.fecha_ultimo_precio))
+            conexion.miCursor.execute("INSERT INTO MONOPATINES2(modelo,marca,potencia,precio,color,fechaUltimoPrecio) VALUES('{}','{}','{}','{}', '{}','{}')".format(self.modelo, self.marca, self.potencia, self.precio, self.color, self.fecha_ultimo_precio))
             conexion.miConexion.commit()
             separador()
             print("Se cargo el monopatin exitosamente")
             separador()
-        except IntegrityError:
+        except:
             separador()
-            print("La marca que ingreso ya se encuentra en la base de datos")
+            print("No se logro cargar el monopatin")
             separador()
         finally:
             conexion.finalizar()
+    

@@ -1,6 +1,6 @@
 from clases import Monopatin, Monopatin2
-from database import crearTabla, crearTabla2
-from funciones import modificar_Monopatin, borrar_monopatin, mostrarTabla, separador, mensajeError
+from database import crearTabla, crearTabla2, crearTablaHistorico
+from funciones import actualizar_precios, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador, mensajeError
 import datetime
 
 
@@ -14,6 +14,7 @@ def menuPrincipal():
             "4.Cargar Disponibilidad\n"
             "5.Mostrar Tabla\n"
             "6.Cargar Monopatin avanzado\n"
+            "7.Aumentar precio respecto al dolar\n"
             "0.Salir del Menu\n"
         )
         try:
@@ -43,6 +44,8 @@ def menuPrincipal():
                 cargar_datos(opcion)
                 monopatin2 = Monopatin2(modelo1, marca1, potencia1, color1, precio1, fecha1)
                 monopatin2.cargar_monopatin2()
+            elif opcion == 7:
+                actualizar_precios()
 
             elif opcion == 0:
                 print("Gracias por usar nuestro programa")
@@ -170,11 +173,9 @@ def cargar_datos(opcion):
         while Valido == True:
             try:
                 if opcion == 2:
-                    id1 = int(
-                        input("Ingrese el ID del monopatin que desea modficar: "))
+                    id1 = int(input("Ingrese el ID del monopatin que desea modficar: "))
                 else:
-                    id1 = int(
-                        input("Ingrese el ID del monopatin que desea eliminar: "))
+                    id1 = int(input("Ingrese el ID del monopatin que desea eliminar: "))
 
                 if id1 > 0:
                     Valido = False
@@ -191,4 +192,5 @@ def cargar_datos(opcion):
 
 crearTabla()
 crearTabla2()
+crearTablaHistorico()
 menuPrincipal()

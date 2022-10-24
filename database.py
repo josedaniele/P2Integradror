@@ -10,11 +10,11 @@ class Conexiones:
     def finalizar(self):
         self.miConexion.close()
 
+conexion = Conexiones()
+    
     # Primer Tabla
 
-
 def crearTabla():
-    conexion = Conexiones()
     conexion.iniciar()
     conexion.miCursor.execute(
         "CREATE TABLE IF NOT EXISTS MONOPATINES (ID INTEGER PRIMARY KEY , marca  VARCHAR(30) ,precio FLOAT NOT NULL, cant_disponibles INTEGER NOT NULL,UNIQUE(marca))")
@@ -25,9 +25,15 @@ def crearTabla():
 
 
 def crearTabla2():
-    conexion = Conexiones()
     conexion.iniciar()
     conexion.miCursor.execute(
         "CREATE TABLE IF NOT EXISTS MONOPATINES2 (ID_mono INTEGER PRIMARY KEY ,modelo VARCHAR(30), marca VARCHAR(30), potencia VARCHAR(30), precio INTEGER, color VARCHAR(30), fechaUltimoPrecio DATETIME)")
+    conexion.miConexion.commit()
+    conexion.finalizar()
+
+def crearTablaHistorico():
+    conexion.iniciar()
+    conexion.miCursor.execute(
+        "CREATE TABLE IF NOT EXISTS HISTORICO_PRECIO (ID_mono INTEGER PRIMARY KEY ,modelo VARCHAR(30), marca VARCHAR(30), potencia VARCHAR(30), precio INTEGER, color VARCHAR(30), fechaPreciosViejos DATETIME)")
     conexion.miConexion.commit()
     conexion.finalizar()
