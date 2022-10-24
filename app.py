@@ -1,6 +1,6 @@
-from tkinter import E
+from clases import Monopatin, Monopatin2
 from database import crearTabla, crearTabla2
-from funciones import Monopatin, Monopatin2, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador
+from funciones import modificar_Monopatin, borrar_monopatin, mostrarTabla, separador
 import datetime
 
 def menuPrincipal():
@@ -57,6 +57,7 @@ def menuPrincipal():
             separador()
 
 def cargar_datos(opcion):
+    
     global marca1
     global modelo1
     global potencia1
@@ -64,43 +65,35 @@ def cargar_datos(opcion):
     global cant_ingresada
     global color1
     global fecha1
+    
     #modelo
     if opcion == 6 :
         Valido = True
         while Valido == True:
-            try:
-                modelo1 = input("Ingrese el modelo: ").upper()
-                caracteres = len(modelo1)
-                if caracteres < 30:
-                      Valido = False
-                else:
-                      print("Ingresó una longitud mayor a 30 caracteres.")
-                      Valido = True
-            except ValueError:
-                separador()
-                print("Valor invalido, introduzca bien el modelo")
-                separador()
+            modelo1 = input("Ingrese el modelo: ").upper()
+            caracteres = len(modelo1)
+            if caracteres < 30:
+                  Valido = False
+            else:
+                  print("Ingresó una longitud mayor a 30 caracteres.")
+                  Valido = True
     #marca
     if opcion == 1 or opcion == 4 or opcion == 6:
         Valido = True
         while Valido == True:
-            try:
-                marca1 = input("Ingrese la marca: ").upper()
-                caracteres = len(marca1)
-                tipo = marca1.isalpha()
-                if tipo == True:
-                 if caracteres < 30:
-                      Valido = False
-                 else:
-                     print("Ingresó una longitud mayor a 30 caracteres.")
-                     Valido = True
-                else: 
-                    print("Ingreso un tipo de caracter no valido.")
-                    Valido = True
-            except ValueError:
-                separador()
-                print("Valor invalido, introduzca bien la marca")
-                separador()
+            marca1 = input("Ingrese la marca: ").upper()
+            caracteres = len(marca1)
+            tipo = marca1.isalpha()
+            if tipo == True:
+             if caracteres < 30:
+                  Valido = False
+             else:
+                 print("Ingresó una longitud mayor a 30 caracteres.")
+                 Valido = True
+            else: 
+                print("Ingreso un tipo de caracter no valido.")
+                Valido = True
+
     #potencia
     if opcion == 6:
         Valido = True
@@ -111,31 +104,30 @@ def cargar_datos(opcion):
                      Valido= False
                 else:
                     Valido = True
+                    separador()
+                    print("La potencia no puede ser menor o igual a 0")
+                    separador()
             except ValueError:
                 separador()
-                print("Valor invalido")
+                print("Valor invalido, introduzca un numero")
                 separador()
     #color
     if opcion == 6:
         Valido= True
         while Valido == True:
-            try:
-                color1 = input("Ingrese el color del monopatin: ")
-                caracteres = len(color1)
-                tipo = color1.isalpha()
-                if tipo == True:
-                 if caracteres < 30:
-                      Valido = False
-                 else:
-                     print("Ingresó una longitud mayor a 30 caracteres.")
-                     Valido = True
-                else: 
-                    print("Ingreso un tipo de caracter no valido.")
-                    Valido = True
-            except ValueError:
-                separador()
-                print("Valor invalido")
-                separador()
+            color1 = input("Ingrese el color del monopatin: ")
+            caracteres = len(color1)
+            tipo = color1.isalpha()
+            if tipo == True:
+             if caracteres < 30:
+                  Valido = False
+             else:
+                 print("Ingresó una longitud mayor a 30 caracteres.")
+                 Valido = True
+            else: 
+                print("Ingreso un tipo de caracter no valido.")
+                Valido = True
+ 
     #precio
     if opcion == 1 or opcion == 2 or opcion == 6:
         Valido = True
@@ -146,6 +138,9 @@ def cargar_datos(opcion):
                      Valido= False
                 else:
                     Valido = True
+                    separador()
+                    print("El precio no puede ser menor o igual a 0")
+                    separador()
             except ValueError:
                 separador()
                 print("Valor invalido, introduzca un numero")
@@ -156,11 +151,13 @@ def cargar_datos(opcion):
         while Valido == True:
             try:
                 cant_ingresada = int(input("Ingrese la cantidad disponible de monopatines: "))
-                if int(cant_ingresada) > 0:
+                if int(cant_ingresada) >= 0:
                      Valido= False
                 else:
                     Valido = True
-                Valido = False
+                    separador()
+                    print("La cantidad de monopatines debe ser debe ser mayor o igual a 0")
+                    separador()
             except ValueError:
                 separador()
                 print("Valor invalido, introduzca un numero")
@@ -172,15 +169,11 @@ def cargar_datos(opcion):
         while Valido == True:
             try:
                 fecha1 = input("Ingrese la fecha del ultimo precio: ")
-                fecha2 = datetime.datetime.strptime(fecha1, '%d/%m/%Y')
-                if fecha1 == fecha2:
-                     Valido= False
-                else:
-                    Valido = True
+                fecha1 = datetime.datetime.strptime(fecha1, '%d/%m/%Y')
                 Valido = False
             except ValueError:
                 separador()
-                print("Valor invalido, ingrese la fecha de forma correcta.")
+                print("Formato invalido, ingrese la fecha de forma correcta.")
                 separador()
 
 
