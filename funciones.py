@@ -11,7 +11,7 @@ def mostrarTabla():
 
     except:
         separador()
-        print("No se puede mostrar la tabla")
+        print("No se puede mostrar la tabla.")
         separador()
     finally:
         conexion.finalizar()
@@ -27,15 +27,15 @@ def borrar_monopatin(id1):
         total_changes= conexion.miConexion.total_changes
         if total_changes == 0:
             separador()
-            print("No se encontro el monopatin")
+            print("No se encontro el monopatin.")
             separador()
         else:
             separador()
-            print("El monopatin fue eliminado exitosamente")
+            print("El monopatin fue eliminado exitosamente.")
             separador()
     except:
         separador()
-        print("El monopatin no pudo ser eliminado")
+        print("El monopatin no pudo ser eliminado.")
         separador()
     finally:
         conexion.finalizar()
@@ -52,15 +52,15 @@ def modificar_Monopatin(precio, id1):
         total_changes= conexion.miConexion.total_changes
         if total_changes == 0:
             separador()
-            print("No se encontro el monopatin")
+            print("No se encontro el monopatin.")
             separador()
         else:
             separador()
-            print("El monopatin fue modificado exitosamente")
+            print("El monopatin fue modificado exitosamente.")
             separador()
     except:
         separador()
-        print('Error al modificar el monopatin')
+        print('Error al modificar el monopatin.')
         separador()
     finally:
         conexion.finalizar()
@@ -74,7 +74,7 @@ def actualizar_precios():
             conexion.miConexion.commit()
         except:
             separador()
-            print("No se pudieron guardar los precios viejos")
+            print("No se pudieron guardar los precios viejos.")
             separador()
         finally:
             conexion.finalizar()
@@ -86,11 +86,11 @@ def actualizar_precios():
             conexion.miCursor.execute("UPDATE MONOPATINES2 SET precio = round((precio * 1.23),2), fechaUltimoPrecio = '{}'".format(fechaActual))
             conexion.miConexion.commit()
             separador()
-            print("El precio de los monopatines sufrio un aumento del 23% por el aumento del dolar")
+            print("El precio de los monopatines sufrio un aumento del 23% por el aumento del dolar.")
             separador()
         except:
             separador()
-            print("El precio del monopatin no pudo ser aumentado")
+            print("El precio del monopatin no pudo ser aumentado.")
             separador()
         finally:
             conexion.finalizar()
@@ -99,12 +99,12 @@ def mostrar_tabla_segunFecha(fecha1):
     conexion = Conexiones()
     conexion.iniciar()
     try:
-        conexion.miCursor.execute("SELECT * FROM HISTORICO_PRECIO WHERE fechaPreciosViejos <='{}'" .format(fecha1))
+        conexion.miCursor.execute("SELECT * FROM HISTORICO_PRECIO WHERE fechaPreciosViejos <='{}' ORDER BY fechaPreciosViejos" .format(fecha1))
         print(conexion.miCursor.fetchall())
 
     except:
         separador()
-        print("No se puede mostrar la tabla segun la fecha")
+        print("No se puede mostrar la tabla segun la fecha.")
         separador()
     finally:
         conexion.finalizar()
@@ -120,7 +120,7 @@ def mensajeError(tipoError):
 # error tipo 3 fecha
     if tipoError == 1 :
         separador()
-        print("Valor invalido ingrese un numero")
+        print("Valor invalido ingrese un numero.")
         separador()
     elif tipoError == 2:
             separador()

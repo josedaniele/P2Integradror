@@ -55,7 +55,7 @@ def menuPrincipal():
                 
             
             elif opcion == 0:
-                print("Gracias por usar nuestro programa")
+                print("Gracias por usar nuestro programa.")
                 break
 
             else:
@@ -76,19 +76,7 @@ def cargar_datos(opcion):
     global fecha1
     global id1
     
-    #Fecha para mostrar registros
-    if opcion == 8:
-        Valido = True
-        while Valido == True:
-            try:
-                fecha1 = input("Ingrese la fecha: ")
-                fecha1 = datetime.datetime.strptime(fecha1, '%d/%m/%Y')
-                Valido = False
-            except:
-                separador()
-                print("No se pudo cargar la fecha")
-                separador()
-                
+    
 
     # modelo
     if opcion == 6:
@@ -129,7 +117,7 @@ def cargar_datos(opcion):
                     Valido = False
                 else:
                     separador()
-                    print("La potencia no puede ser menor o igual a 0")
+                    print("La potencia no puede ser menor o igual a 0.")
                     separador()
             except ValueError:
                 mensajeError(1)
@@ -158,7 +146,7 @@ def cargar_datos(opcion):
                     Valido = False
                 else:
                     separador()
-                    print("El precio no puede ser menor o igual a 0")
+                    print("El precio no puede ser menor o igual a 0.")
                     separador()
             except ValueError:
                 mensajeError(1)
@@ -173,17 +161,17 @@ def cargar_datos(opcion):
                     Valido = False
                 else:
                     separador()
-                    print("La cantidad de monopatines debe ser debe ser mayor o igual a 0")
+                    print("La cantidad de monopatines debe ser debe ser mayor o igual a 0.")
                     separador()
             except ValueError:
                 mensajeError(1)
 
     # fecha
-    if opcion == 6:
+    if opcion == 6 or opcion == 8:
         Valido = True
         while Valido == True:
             try:
-                fecha1 = input("Ingrese la fecha del ultimo precio: ")
+                fecha1 = input("Ingrese la fecha: ")
                 fecha1 = datetime.datetime.strptime(fecha1, '%d/%m/%Y')
                 Valido = False
             except ValueError:
@@ -194,7 +182,7 @@ def cargar_datos(opcion):
         while Valido == True:
             try:
                 if opcion == 2:
-                    id1 = int(input("Ingrese el ID del monopatin que desea modficar: "))
+                    id1 = int(input("Ingrese el ID del monopatin que desea modificar: "))
                 else:
                     id1 = int(input("Ingrese el ID del monopatin que desea eliminar: "))
 
@@ -202,7 +190,7 @@ def cargar_datos(opcion):
                     Valido = False
                 else:
                     separador()
-                    print("ID invalido, el id no puede ser menor o igual a 0")
+                    print("ID invalido, el id no puede ser menor o igual a 0.")
                     separador()
 
             except ValueError:
