@@ -47,7 +47,8 @@ def menuPrincipal():
                 monopatin2.cargar_monopatin2()
 
             elif opcion == 7:
-                actualizar_precios()
+                cargar_datos(opcion)
+                actualizar_precios(porcentajeDolar)
 
             elif opcion == 8:
                 cargar_datos(opcion)
@@ -75,7 +76,7 @@ def cargar_datos(opcion):
     global color1
     global fecha1
     global id1
-    
+    global porcentajeDolar
     
 
     # modelo
@@ -155,8 +156,7 @@ def cargar_datos(opcion):
         Valido = True
         while Valido == True:
             try:
-                cant_ingresada = int(
-                    input("Ingrese la cantidad disponible de monopatines: "))
+                cant_ingresada = int(input("Ingrese la cantidad disponible de monopatines: "))
                 if int(cant_ingresada) >= 0:
                     Valido = False
                 else:
@@ -196,7 +196,20 @@ def cargar_datos(opcion):
             except ValueError:
                 mensajeError(1)
 
-
+    if opcion == 7:
+            Valido = True
+            while Valido == True:
+                try:
+                    porcentajeDolar = int(input("Ingrese en que porcentaje desea aumentar el precio respecto al dolar: "))
+                    Valido = False
+                    if porcentajeDolar > 0:
+                        Valido = False
+                    else:
+                        separador()
+                        print("El porcentaje no puede tomar valores negativos.")
+                        separador()
+                except ValueError:
+                    mensajeError(1)
 #Llamadas a las funciones
 
 crearTabla()

@@ -61,7 +61,7 @@ def modificar_Monopatin(precio, id1):
     finally:
         conexion.finalizar()
 
-def actualizar_precios():
+def actualizar_precios(porcentajeDolar):
         #cargamos en el historial antes de actualizar
         conexion.iniciar()
         try:
@@ -76,19 +76,19 @@ def actualizar_precios():
          
 
         conexion.iniciar()
-        try:
-            fechaActual= datetime.now()
-            conexion.miCursor.execute("UPDATE MONOPATINES2 SET precio = round((precio * 1.23),2), fechaUltimoPrecio = '{}'".format(fechaActual))
-            conexion.miConexion.commit()
-            separador()
-            print("El precio de los monopatines sufrio un aumento del 23% por el aumento del dolar.")
-            separador()
-        except:
-            separador()
-            print("El precio del monopatin no pudo ser aumentado.")
-            separador()
-        finally:
-            conexion.finalizar()
+        
+        fechaActual= datetime.now()
+        conexion.miCursor.execute("UPDATE MONOPATINES2 SET precio = round((precio+({}*precio)/100),2), fechaUltimoPrecio = '{}'".format(porcentajeDolar, fechaActual))
+        conexion.miConexion.commit()
+        separador()
+        print("El precio de los monopatines sufrio un aumento del {}% por el aumento del dolar.".format(porcentajeDolar))
+        separador()
+        
+        separador()
+        print("El precio del monopatin no pudo ser aumentado.")
+        separador()
+        
+        conexion.finalizar()
 
 def mostrar_tabla_segunFecha(fecha1):
     conexion.iniciar()
