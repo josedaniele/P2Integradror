@@ -83,7 +83,7 @@ def actualizar_precios():
         conexion.iniciar()
         try:
             fechaActual= datetime.now()
-            conexion.miCursor.execute("UPDATE MONOPATINES2 SET precio = precio * 1.23, fechaUltimoPrecio = '{}'".format(fechaActual))
+            conexion.miCursor.execute("UPDATE MONOPATINES2 SET precio = round((precio * 1.23),2), fechaUltimoPrecio = '{}'".format(fechaActual))
             conexion.miConexion.commit()
             separador()
             print("El precio de los monopatines sufrio un aumento del 23% por el aumento del dolar")
@@ -99,7 +99,7 @@ def mostrar_tabla_segunFecha(fecha1):
     conexion = Conexiones()
     conexion.iniciar()
     try:
-        conexion.miCursor.execute("SELECT * FROM MONOPATINES2 WHERE fechaUltimoPrecio <='{}'" .format(fecha1))
+        conexion.miCursor.execute("SELECT * FROM HISTORICO_PRECIO WHERE fechaPreciosViejos <='{}'" .format(fecha1))
         print(conexion.miCursor.fetchall())
 
     except:
