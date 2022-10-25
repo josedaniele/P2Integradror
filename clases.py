@@ -1,6 +1,5 @@
-from os import sep
 from sqlite3 import IntegrityError
-from database import Conexiones
+from database import Conexiones, conexion
 from funciones import separador
 # Clase Monopatin
 class Monopatin:
@@ -12,7 +11,6 @@ class Monopatin:
     # Metodos de instancia
 
     def cargar_monopatin(self):
-        conexion = Conexiones()
         conexion.iniciar()
         try:
             conexion.miCursor.execute("INSERT INTO MONOPATINES(marca,precio,cant_disponibles) VALUES('{}', '{}','{}')".format(self.marca, self.precio, self.cant_disponibles))
@@ -30,7 +28,6 @@ class Monopatin:
             conexion.finalizar()
 
     def cargarDisponibilidad(self):
-        conexion = Conexiones()
         conexion.iniciar()
         try:
             conexion.miCursor.execute("UPDATE MONOPATINES SET cant_disponibles='{}' where marca='{}' ".format(self.cant_disponibles, self.marca))
@@ -62,7 +59,6 @@ class Monopatin2(Monopatin):
         self.fecha_ultimo_precio = fecha_ultimo_precio
 
     def cargar_monopatin2(self):
-        conexion = Conexiones()
         conexion.iniciar()
         try:
             conexion.miCursor.execute("INSERT INTO MONOPATINES2(modelo,marca,potencia,precio,color,fechaUltimoPrecio) VALUES('{}','{}','{}','{}', '{}','{}')".format(self.modelo, self.marca, self.potencia, self.precio, self.color, self.fecha_ultimo_precio))

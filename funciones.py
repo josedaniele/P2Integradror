@@ -1,9 +1,8 @@
-from database import Conexiones
+from database import Conexiones, conexion 
 from datetime import datetime
 
 # Funciones de tabla
 def mostrarTabla():
-    conexion = Conexiones()
     conexion.iniciar()
     try:
         conexion.miCursor.execute("SELECT * FROM MONOPATINES ORDER BY marca")
@@ -18,7 +17,6 @@ def mostrarTabla():
 
 
 def borrar_monopatin(id1):
-    conexion = Conexiones()
     conexion.iniciar()
     try:
         conexion.miCursor.execute("DELETE FROM MONOPATINES WHERE ID='{}'".format(id1))
@@ -42,11 +40,9 @@ def borrar_monopatin(id1):
 
 
 def modificar_Monopatin(precio, id1):
-    conexion = Conexiones()
     conexion.iniciar()
     try:
-        conexion.miCursor.execute(
-            "UPDATE MONOPATINES SET precio='{}' where ID='{}' ".format(precio, id1))
+        conexion.miCursor.execute("UPDATE MONOPATINES SET precio='{}' where ID='{}' ".format(precio, id1))
         conexion.miConexion.commit()
         #DETECTA LA CANTIDAD DE CAMBIOS Y EN CASO DE NO ENCONTRAR CAMBIOS SE INTUYE QUE NO EXISTE EL MONOPATIN
         total_changes= conexion.miConexion.total_changes
@@ -67,7 +63,6 @@ def modificar_Monopatin(precio, id1):
 
 def actualizar_precios():
         #cargamos en el historial antes de actualizar
-        conexion= Conexiones()
         conexion.iniciar()
         try:
             conexion.miCursor.execute("INSERT INTO HISTORICO_PRECIO(modelo,marca,potencia,precio,color,fechaPreciosViejos) SELECT modelo,marca,potencia,precio,color,fechaUltimoPrecio FROM MONOPATINES2 ")
@@ -96,7 +91,6 @@ def actualizar_precios():
             conexion.finalizar()
 
 def mostrar_tabla_segunFecha(fecha1):
-    conexion = Conexiones()
     conexion.iniciar()
     try:
         conexion.miCursor.execute("SELECT * FROM HISTORICO_PRECIO WHERE fechaPreciosViejos <='{}' ORDER BY fechaPreciosViejos" .format(fecha1))
