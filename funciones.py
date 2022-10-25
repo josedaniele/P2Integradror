@@ -94,6 +94,20 @@ def actualizar_precios():
             separador()
         finally:
             conexion.finalizar()
+
+def mostrar_tabla_segunFecha(fecha1):
+    conexion = Conexiones()
+    conexion.iniciar()
+    try:
+        conexion.miCursor.execute("SELECT * FROM MONOPATINES2 WHERE fechaUltimoPrecio <='{}'" .format(fecha1))
+        print(conexion.miCursor.fetchall())
+
+    except:
+        separador()
+        print("No se puede mostrar la tabla segun la fecha")
+        separador()
+    finally:
+        conexion.finalizar()
 #Funciones esteticas
 
 def separador():

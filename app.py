@@ -1,6 +1,6 @@
 from clases import Monopatin, Monopatin2
 from database import crearTabla, crearTabla2, crearTablaHistorico
-from funciones import actualizar_precios, modificar_Monopatin, borrar_monopatin, mostrarTabla, separador, mensajeError
+from funciones import actualizar_precios, modificar_Monopatin, borrar_monopatin, mostrar_tabla_segunFecha, mostrarTabla, separador, mensajeError
 import datetime
 
 
@@ -15,6 +15,7 @@ def menuPrincipal():
             "5.Mostrar Tabla\n"
             "6.Cargar Monopatin avanzado\n"
             "7.Aumentar precio respecto al dolar\n"
+            "8.Mostrar registros desde la fecha ingresada\n"
             "0.Salir del Menu\n"
         )
         try:
@@ -44,9 +45,15 @@ def menuPrincipal():
                 cargar_datos(opcion)
                 monopatin2 = Monopatin2(modelo1, marca1, potencia1, color1, precio1, fecha1)
                 monopatin2.cargar_monopatin2()
+
             elif opcion == 7:
                 actualizar_precios()
 
+            elif opcion == 8:
+                cargar_datos(opcion)
+                mostrar_tabla_segunFecha(fecha1)
+                
+            
             elif opcion == 0:
                 print("Gracias por usar nuestro programa")
                 break
@@ -68,6 +75,20 @@ def cargar_datos(opcion):
     global color1
     global fecha1
     global id1
+    
+    #Fecha para mostrar registros
+    if opcion == 8:
+        Valido = True
+        while Valido == True:
+            try:
+                fecha1 = input("Ingrese la fecha: ")
+                fecha1 = datetime.datetime.strptime(fecha1, '%d/%m/%Y')
+                Valido = False
+            except:
+                separador()
+                print("No se pudo cargar la fecha")
+                separador()
+                
 
     # modelo
     if opcion == 6:
