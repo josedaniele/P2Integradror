@@ -78,9 +78,9 @@ def actualizar_precios(porcentajeDolar):
         conexion.iniciar()
         
         fechaActual= datetime.now()
-        conexion.miCursor.execute("UPDATE MONOPATINES2 SET precio = round((precio+({}*precio)/100),2), fechaUltimoPrecio = '{}'".format(porcentajeDolar, fechaActual))
-        conexion.miConexion.commit()
         try:
+            conexion.miCursor.execute("UPDATE MONOPATINES2 SET precio = round((precio+({}*precio)/100),2), fechaUltimoPrecio = '{}'".format(porcentajeDolar, fechaActual))
+            conexion.miConexion.commit()
             separador()
             print("El precio de los monopatines sufrio un aumento del {}% por el aumento del dolar.".format(porcentajeDolar))
             separador()
